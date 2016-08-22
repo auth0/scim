@@ -1,0 +1,17 @@
+{
+  "name": "scim-api",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/auth0/scim"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.0.0",
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.1"
+  }
+}
