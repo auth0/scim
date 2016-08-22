@@ -6,12 +6,19 @@
     "url": "git://github.com/auth0/scim"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "lab -v"
   },
   "license": "MIT",
   "dependencies": {
     "express": "~4.0.0",
+    "joi": "^9.0.4",
     "morgan": "~1.0.0",
     "body-parser": "~1.0.1"
+  },
+  "devDependencies": {
+    "code": "^3.0.2",
+    "hoek": "^4.0.2",
+    "lab": "^11.0.1"
   }
 }
