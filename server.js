@@ -2,7 +2,7 @@ var express     = require('express');
 var bodyParser  = require('body-parser');
 var app         = express();
 var morgan      = require('morgan');
-var mapper      = require('./lib/mapper');
+var Translate      = require('./lib/translate');
 
 var Auth0ManagementClient = require('auth0').ManagementClient;
 var auth0Client = new Auth0ManagementClient({
@@ -24,11 +24,19 @@ var router = express.Router();
 router.route('/users')
   .post(function (req, res, next) {
     var scimUser = req.body;
-    var auth0_user = mapper.users.scimToAuth0(scimUser);
-
-    auth0Client.users.create(auth0_user, function (err, newAuth0User) {
+    
+    return Translate.toAuth0(scimUser, (err, auth0_user) => {
       if (err) return next(err);
-      res.status(201).json(newAuth0User);
+      
+      auth0Client.users.create(auth0_user, (err, newAuth0User) => {
+        if (err) return next(err);
+        
+        Translate.fromAuth0(newAuth0User, (err, newScimUser) => {
+          if (err) return next(err);
+          
+          res.status(201).json(newScimUser);
+        });
+      });
     });
   })
 
