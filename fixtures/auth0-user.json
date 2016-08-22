@@ -1,0 +1,27 @@
+{
+  "email": "batman@gotham.com",
+  "email_verified": true,
+  "updated_at": "2016-07-27T22:05:11.290Z",
+  "picture": "https://s.gravatar.com/avatar/d46d8fa3b6c7af9b1794aa260b38a89e?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fba.png",
+  "user_id": "auth0|570e3d8f3c18506a3c1a0100",
+  "name": "batman@gotham.com",
+  "nickname": "batman",
+  "identities": [
+    {
+      "user_id": "570e3d8f3c18506a3c1a0100",
+      "provider": "auth0",
+      "connection": "Username-Password-Authentication",
+      "isSocial": false
+    }
+  ],
+  "created_at": "2016-04-13T12:37:35.172Z",
+  "last_password_reset": "2016-07-27T21:57:08.451Z",
+  "app_metadata": {
+    "roles": [
+      "Lender"
+    ]
+  },
+  "last_ip": "124.157.109.94",
+  "last_login": "2016-07-27T22:05:10.796Z",
+  "logins_count": 72
+}
