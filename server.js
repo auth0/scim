@@ -7,8 +7,8 @@ var Translate   = require('./lib/translate');
 
 var Auth0ManagementClient = require('auth0').ManagementClient;
 var auth0Client = new Auth0ManagementClient({
-  domain: 'scim-test.auth0.com',
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJrUGV6cFhrQkdON0JqWHd3TjVuRHgxekJWVGZvZVU4aiIsInNjb3BlcyI6eyJ1c2VycyI6eyJhY3Rpb25zIjpbInJlYWQiLCJjcmVhdGUiXX19LCJpYXQiOjE0NzE5MDM5NjgsImp0aSI6ImU5MDI2YWUxMzZmNDJkMmRjMmEwYjg5ZDJhN2MyNzk2In0.xGaqfyA_0fm-OOv5IaopHXK-MlMA3yNusr7LQ7nHQiM'
+  domain: '{YOU}.auth0.com',
+  token: '{API2_TOKEN}'
 });
 
 // configure app
@@ -67,6 +67,8 @@ router.route('/users/:user_id')
     });
   });
 
+// TODO: authenticate requests
+//app.all('*', requireAuthentication);
 app.use('/scim', router);
 
 app.use(function (err, req, res, next) {
