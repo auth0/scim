@@ -2,7 +2,8 @@ var express     = require('express');
 var bodyParser  = require('body-parser');
 var app         = express();
 var morgan      = require('morgan');
-var Translate      = require('./lib/translate');
+var async       = require('async');
+var Translate   = require('./lib/translate');
 
 var Auth0ManagementClient = require('auth0').ManagementClient;
 var auth0Client = new Auth0ManagementClient({
@@ -38,16 +39,6 @@ router.route('/users')
         });
       });
     });
-    
-    var auth0_user = mapper.users.scimToAuth0(scimUser);
-
-    auth0Client.users.create(auth0_user, function (err, newAuth0User) {
-      if (err) return next(err);
-      
-      
-      
-      res.status(201).json(newAuth0User);
-    });
   })
 
   .get(function (req, res, next) {
@@ -55,11 +46,10 @@ router.route('/users')
     auth0Client.users.getAll(function (err, auth0Users) {
       if (err) return next(err);
 
-      var scimUsers = (auth0Users || []).map(function (auth0User) {
-        return mapper.users.auth0ToScim(auth0User);
+      async.map(auth0Users || [], Translate.fromAuth0, (err, scimUsers) => {
+        if (err) return next(err);
+        res.json(scimUsers);
       });
-
-      res.json(scimUsers);
     });
   });
 
@@ -69,8 +59,11 @@ router.route('/users/:user_id')
       if (err) return next(err);
       if (!auth0User) return res.send(404);
 
-      var scimUser = mapper.users.auth0ToScim(auth0User);
-      res.json(scimUser);
+      Translate.fromAuth0(auth0User, (err, scimUser) => {
+        if (err) return next(err);
+        
+        res.json(scimUser);
+      });
     });
   });
 

@@ -11,13 +11,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "async": "^2.0.1",
     "auth0": "^2.3.1",
     "body-parser": "~1.0.1",
     "express": "~4.0.0",
-    "morgan": "~1.0.0",
     "joi": "^9.0.4",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.1"
+    "morgan": "~1.0.0"
   },
   "devDependencies": {
     "code": "^3.0.2",
