@@ -38,6 +38,16 @@ router.route('/users')
         });
       });
     });
+    
+    var auth0_user = mapper.users.scimToAuth0(scimUser);
+
+    auth0Client.users.create(auth0_user, function (err, newAuth0User) {
+      if (err) return next(err);
+      
+      
+      
+      res.status(201).json(newAuth0User);
+    });
   })
 
   .get(function (req, res, next) {
