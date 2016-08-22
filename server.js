@@ -38,7 +38,7 @@ router.route('/users')
       if (err) return next(err);
 
       var scimUsers = (auth0Users || []).map(function (auth0User) {
-        return mapper.user.auth0ToScim(auth0User);
+        return mapper.users.auth0ToScim(auth0User);
       });
 
       res.json(scimUsers);
@@ -51,7 +51,7 @@ router.route('/users/:user_id')
       if (err) return next(err);
       if (!auth0User) return res.send(404);
 
-      var scimUser = mapper.user.auth0ToScim(auth0User);
+      var scimUser = mapper.users.auth0ToScim(auth0User);
       res.json(scimUser);
     });
   });
